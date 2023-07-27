@@ -33,4 +33,8 @@ public abstract class BaseDTO {
     public void setModifiedTimestamp(LocalDateTime modifiedTimestamp) {
         this.modifiedTimestamp = modifiedTimestamp;
     }
+
+    public boolean isNew() {
+        return id == null;
+    }
 }

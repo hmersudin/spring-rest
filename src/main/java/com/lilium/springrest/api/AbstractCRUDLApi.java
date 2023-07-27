@@ -27,5 +27,5 @@ public interface AbstractCRUDLApi<ENTITY extends DistributedEntity, DTO extends 
      * @param id ID used for searching.
      * @return Returns found DTO otherwise null.
      */
-    DTO findById(Integer id);
+    DTO getById(Integer id);
 }
