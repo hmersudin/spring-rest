@@ -3,6 +3,8 @@ package com.lilium.springrest.api;
 import com.lilium.springrest.dto.BaseDTO;
 import com.lilium.springrest.entity.DistributedEntity;
 
+import java.util.List;
+
 /**
  * Abstract CRUDL api containing base methods for handling of CRUDL operations.
  *

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 public class AbstractCRUDLController<ENTITY extends DistributedEntity, DTO extends BaseDTO> {
     private AbstractCRUDLApi<ENTITY, DTO> api;
 
@@ -16,8 +18,8 @@ public class AbstractCRUDLController<ENTITY extends DistributedEntity, DTO exten
     }
 
     @PostMapping
-    public void save(@RequestBody DTO dto) {
-        api.save(dto);
+    public DTO save(@RequestBody DTO dto) {
+        return api.save(dto);
     }
     @GetMapping("{id}")
     public DTO getById(@PathVariable Integer id) {

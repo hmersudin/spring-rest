@@ -12,6 +12,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.List;
 
 public abstract class AbstractCRUDLService<ENTITY extends DistributedEntity, DTO extends BaseDTO>
         implements AbstractCRUDLApi<ENTITY, DTO> {

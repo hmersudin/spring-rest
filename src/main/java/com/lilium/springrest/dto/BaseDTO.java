@@ -1,5 +1,7 @@
 package com.lilium.springrest.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDateTime;
 
 /**
@@ -34,6 +36,7 @@ public abstract class BaseDTO {
         this.modifiedTimestamp = modifiedTimestamp;
     }
 
+    @JsonIgnore
     public boolean isNew() {
         return id == null;
     }
