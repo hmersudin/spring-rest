@@ -5,6 +5,8 @@ import com.lilium.springrest.converter.AbstractDTOConverter;
 import com.lilium.springrest.dto.BaseDTO;
 import com.lilium.springrest.entity.DistributedEntity;
 import com.lilium.springrest.repository.DistributedRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.util.CollectionUtils;
 
@@ -15,6 +17,7 @@ public abstract class AbstractCRUDLService<ENTITY extends DistributedEntity, DTO
         implements AbstractCRUDLApi<ENTITY, DTO> {
 
     // region Members
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractCRUDLService.class);
     private DistributedRepository<ENTITY> repository;
     private AbstractDTOConverter<ENTITY, DTO> converter;
     private Class<ENTITY> entityClass;
@@ -42,7 +45,7 @@ public abstract class AbstractCRUDLService<ENTITY extends DistributedEntity, DTO
         }
 
         if (entity == null) {
-            // TODO: log error
+            LOG.error("Failed to save an entity of class '{}'", entity.getClass().getSimpleName());
             return null;
         }
 
@@ -61,7 +64,12 @@ public abstract class AbstractCRUDLService<ENTITY extends DistributedEntity, DTO
     @Override
     public DTO getById(Integer id) {
         final ENTITY entity = repository.findById(id).orElse(null);
-        return null;
+        if (entity == null) {
+            LOG.error("Failed to find entity with id '{}'", id);
+            return null;
+        }
+
+        return converter.convert(entity);
     }
 
     // To update class specific entity properties
@@ -76,7 +84,7 @@ public abstract class AbstractCRUDLService<ENTITY extends DistributedEntity, DTO
 
             return entity;
         } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return null;
     }
