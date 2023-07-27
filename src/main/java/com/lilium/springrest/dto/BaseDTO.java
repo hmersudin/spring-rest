@@ -3,7 +3,7 @@ package com.lilium.springrest.dto;
 import java.time.LocalDateTime;
 
 /**
- * Base abstract dto for all of our DTOs.
+ * Base abstract DTO class for all of our DTOs.
  */
 public abstract class BaseDTO {
     private Integer id;

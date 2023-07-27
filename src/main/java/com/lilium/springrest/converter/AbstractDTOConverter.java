@@ -9,7 +9,16 @@ import com.lilium.springrest.entity.DistributedEntity;
  * @param <ENTITY> Entity to convert.
  * @param <DTO> DTO in which we are converting.
  */
-public class AbstractDTOConverter<ENTITY extends DistributedEntity, DTO extends BaseDTO> {
+public abstract class AbstractDTOConverter<ENTITY extends DistributedEntity, DTO extends BaseDTO> {
+
+    /**
+     * Force us to always convert class specific properties.
+     * Converts forwarded entity to forwarded DTO.
+     *
+     * @param entity Entity to convert.
+     * @return Converted entity as a DTO.
+     */
+    public abstract DTO convert(final ENTITY entity);
 
     /**
      * Converts forwarded entity to forwarded DTO.
