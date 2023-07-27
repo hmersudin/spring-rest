@@ -5,6 +5,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.*;
@@ -23,6 +24,9 @@ public class UserRestTest {
 
         final UserDTO byId = REST_TEMPLATE.getForObject(URL + "/" + savedDTO.getId(), UserDTO.class);
         verifyUserDTO(dto, byId);
+
+        List dtos = REST_TEMPLATE.getForObject(URL + "/list", List.class);
+        assertThat(dtos).isNotEmpty();
     }
 
     private static void verifyUserDTO(UserDTO expected, UserDTO actual) {

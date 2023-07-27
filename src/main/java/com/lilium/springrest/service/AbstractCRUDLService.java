@@ -1,5 +1,6 @@
 package com.lilium.springrest.service;
 
+import com.google.common.collect.Lists;
 import com.lilium.springrest.api.AbstractCRUDLApi;
 import com.lilium.springrest.converter.AbstractDTOConverter;
 import com.lilium.springrest.dto.BaseDTO;
@@ -11,8 +12,10 @@ import org.springframework.core.GenericTypeResolver;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 
 public abstract class AbstractCRUDLService<ENTITY extends DistributedEntity, DTO extends BaseDTO>
         implements AbstractCRUDLApi<ENTITY, DTO> {
@@ -71,6 +74,15 @@ public abstract class AbstractCRUDLService<ENTITY extends DistributedEntity, DTO
         }
 
         return converter.convert(entity);
+    }
+
+    @Override
+    public List<DTO> list() {
+        ArrayList<ENTITY> entities = Lists.newArrayList(repository.findAll());
+        if (CollectionUtils.isEmpty(entities)) {
+            return Collections.emptyList();
+        }
+        return converter.convertList(entities);
     }
 
     // To update class specific entity properties

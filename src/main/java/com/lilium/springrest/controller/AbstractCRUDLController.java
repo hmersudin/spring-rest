@@ -25,4 +25,9 @@ public class AbstractCRUDLController<ENTITY extends DistributedEntity, DTO exten
     public DTO getById(@PathVariable Integer id) {
         return api.getById(id);
     }
+
+    @GetMapping("/list")
+    public List<DTO> list() {
+        return api.list();
+    }
 }

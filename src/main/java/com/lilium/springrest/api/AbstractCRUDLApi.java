@@ -30,4 +30,6 @@ public interface AbstractCRUDLApi<ENTITY extends DistributedEntity, DTO extends 
      * @return Returns found DTO otherwise null.
      */
     DTO getById(Integer id);
+
+    List<DTO> list();
 }

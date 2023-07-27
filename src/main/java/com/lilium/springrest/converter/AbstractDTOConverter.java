@@ -2,6 +2,11 @@ package com.lilium.springrest.converter;
 
 import com.lilium.springrest.dto.BaseDTO;
 import com.lilium.springrest.entity.DistributedEntity;
+import org.springframework.util.CollectionUtils;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Abstract converter used to convert from ENTITY to DTO.
@@ -32,5 +37,21 @@ public abstract class AbstractDTOConverter<ENTITY extends DistributedEntity, DTO
         dto.setId(entity.getId());
         dto.setCreatedTimestamp(entity.getCreatedTimestamp());
         dto.setModifiedTimestamp(entity.getModifiedTimestamp());
+    }
+
+    /**
+     * Converts forwarded entities to list of DTOs.
+     *
+     * @param entities Entities to convert.
+     * @return List of converted DTOs.
+     */
+    public List<DTO> convertList(ArrayList<ENTITY> entities) {
+        if (CollectionUtils.isEmpty(entities)) {
+            return Collections.emptyList();
+        }
+
+        return entities.stream()
+                .map(this::convert)
+                .toList();
     }
 }
